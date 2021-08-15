@@ -39,7 +39,7 @@ async function tryAgain() {
                 cameraView.srcObject = stream1;
                 navigator.mediaDevices.ondevicechange = null;
                 navigator.mediaDevices.ondevicechange = function (event) {
-                   await tryAgain();
+                   tryAgain();
                 };
                 /*
                 sender.replaceTrack(stream1.getAudioTracks()[0])
