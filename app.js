@@ -12,11 +12,14 @@ function cameraStart() {
     navigator.mediaDevices
         .getUserMedia(constraints)
         .then(function (stream) {
+            console.log("Init Video.");
             updateDeviceList();
             track = stream.getTracks()[0];
             cameraView.srcObject = stream;
         })
         .catch(function (error) {
+            console.log("Error Video.");
+
             console.error("Oops. Something is broken.", error);
         });
 }
