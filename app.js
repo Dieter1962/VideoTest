@@ -21,7 +21,7 @@ function cameraStart() {
             cameraView.srcObject = stream;
             navigator.mediaDevices.ondevicechange = function (event) {
                 console.log("Error Video.1 ");
-              //   tryAgain();
+                 tryAgain();
             };
         })
         .catch(function (error) {
