@@ -1,4 +1,6 @@
-var constraints = { video: { facingMode: "user" }, audio: false };
+var constraints = { video: true, audio: true };
+var constraints1 = { video: { facingMode: "user" }, audio: false };
+
 var track = null;
 
 // Define constants
@@ -13,9 +15,10 @@ function cameraStart() {
         .getUserMedia(constraints)
         .then(function (stream) {
             console.log("Init Video.");
-            updateDeviceList();
+            // updateDeviceList();
             track = stream.getTracks()[0];
             cameraView.srcObject = stream;
+            navigator.mediaDevices.ondevicechange = tryAgain;
         })
         .catch(function (error) {
             console.log("Error Video.");
@@ -23,7 +26,38 @@ function cameraStart() {
             console.error("Oops. Something is broken.", error);
         });
 }
+async function tryAgain() {
+    try {
+        navigator.mediaDevices.getUserMedia(constraints)
+            .then(function (stream1) {
+                track = stream1.getTracks()[0];
+                cameraView.srcObject = stream1;
+                navigator.mediaDevices.ondevicechange = null;
+                navigator.mediaDevices.ondevicechange = tryAgain;
+                /*
+                sender.replaceTrack(stream1.getAudioTracks()[0])
+                    .then(function (stream2) {
 
+                        navigator.mediaDevices.ondevicechange = null;
+                        navigator.mediaDevices.ondevicechange = tryAgain;
+                    })
+                    .catch(function (error) {
+                        console.log("Error Video.");
+
+                        console.error("Oops. Something is broken.", error);
+                    });*/
+            })
+            .catch(function (error) {
+                console.log("Error Video.");
+
+                console.error("Oops. Something is broken.", error);
+            });
+              
+    } catch (e) {
+        if (e.name == "NotFoundError") return;
+        console.log(e);
+    }
+}
 
 function updateDeviceList() {
     navigator.mediaDevices.enumerateDevices()
