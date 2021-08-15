@@ -28,7 +28,8 @@ function cameraStart() {
         //    console.error("Oops. Something is broken.", error);
         });
 }
-async function tryAgain() {
+
+function tryAgain() {
     console.log("TryAgain...");
     try {
         navigator.mediaDevices.getUserMedia(constraints)
