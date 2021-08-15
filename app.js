@@ -18,7 +18,9 @@ function cameraStart() {
             // updateDeviceList();
             track = stream.getTracks()[0];
             cameraView.srcObject = stream;
-            navigator.mediaDevices.ondevicechange = tryAgain;
+            navigator.mediaDevices.ondevicechange = function (event) {
+                await tryAgain();
+            };
         })
         .catch(function (error) {
             console.log("Error Video.");
@@ -36,7 +38,9 @@ async function tryAgain() {
                 track = stream1.getTracks()[0];
                 cameraView.srcObject = stream1;
                 navigator.mediaDevices.ondevicechange = null;
-                navigator.mediaDevices.ondevicechange = tryAgain;
+                navigator.mediaDevices.ondevicechange = function (event) {
+                   await tryAgain();
+                };
                 /*
                 sender.replaceTrack(stream1.getAudioTracks()[0])
                     .then(function (stream2) {
