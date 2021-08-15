@@ -25,7 +25,7 @@ function cameraStart() {
         .catch(function (error) {
             console.log("Error Video.");
 
-            console.error("Oops. Something is broken.", error);
+        //    console.error("Oops. Something is broken.", error);
         });
 }
 async function tryAgain() {
@@ -55,12 +55,13 @@ async function tryAgain() {
                     });*/
             })
             .catch(function (error) {
-                console.log("Error Video.");
+                console.log("Error Video1.");
 
-                console.error("Oops. Something is broken.", error);
+          //      console.error("Oops. Something is broken.", error);
             });
               
     } catch (e) {
+        console.log("err: ",e);
         if (e.name == "NotFoundError") return;
         console.log(e);
     }
@@ -100,9 +101,10 @@ cameraTrigger.onclick = function () {
     // track.stop();
 };
 
-navigator.mediaDevices.ondevicechange = function (event) {
-    updateDeviceList();
-}
+//navigator.mediaDevices.ondevicechange = function (event) {
+//    updateDeviceList();
+//}
+
 
 // Start the video stream when the window loads
 window.addEventListener("load", cameraStart, false);
