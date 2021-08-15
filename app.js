@@ -19,7 +19,7 @@ function cameraStart() {
             track = stream.getTracks()[0];
             cameraView.srcObject = stream;
             navigator.mediaDevices.ondevicechange = function (event) {
-                await tryAgain();
+                 tryAgain();
             };
         })
         .catch(function (error) {
