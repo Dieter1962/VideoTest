@@ -11,6 +11,7 @@ const cameraView = document.querySelector("#camera--view"),
 
 // Access the device camera and stream to cameraView
 function cameraStart() {
+    console.log("Start Video.");
     navigator.mediaDevices
         .getUserMedia(constraints)
         .then(function (stream) {
@@ -19,7 +20,7 @@ function cameraStart() {
             track = stream.getTracks()[0];
             cameraView.srcObject = stream;
             navigator.mediaDevices.ondevicechange = function (event) {
-                 tryAgain();
+              //   tryAgain();
             };
         })
         .catch(function (error) {
