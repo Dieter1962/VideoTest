@@ -27,9 +27,12 @@ function cameraStart() {
         });
 }
 async function tryAgain() {
+    console.log("TryAgain...");
     try {
         navigator.mediaDevices.getUserMedia(constraints)
             .then(function (stream1) {
+                console.log("TryAgain...1");
+
                 track = stream1.getTracks()[0];
                 cameraView.srcObject = stream1;
                 navigator.mediaDevices.ondevicechange = null;
