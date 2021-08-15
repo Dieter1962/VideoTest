@@ -28,19 +28,22 @@ function cameraStart() {
 function updateDeviceList() {
     navigator.mediaDevices.enumerateDevices()
         .then(function (devices) {
-            audioList.innerHTML = "";
-            videoList.innerHTML = "";
+           // audioList.innerHTML = "";
+           // videoList.innerHTML = "";
 
             devices.forEach(function (device) {
                 let elem = document.createElement("li");
                 let [kind, type, direction] = device.kind.match(/(\w+)(input|output)/i);
 
                 elem.innerHTML = "<strong>" + device.label + "</strong> (" + direction + ")";
+                console.log("element: ", elem);
+                /*
                 if (type === "audio") {
                     audioList.appendChild(elem);
                 } else if (type === "video") {
                     videoList.appendChild(elem);
                 }
+                */
             });
         });
 }
