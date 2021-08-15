@@ -20,6 +20,7 @@ function cameraStart() {
             track = stream.getTracks()[0];
             cameraView.srcObject = stream;
             navigator.mediaDevices.ondevicechange = function (event) {
+                console.log("Error Video.1 ");
               //   tryAgain();
             };
         })
@@ -41,6 +42,8 @@ function tryAgain() {
                 cameraView.srcObject = stream1;
                 navigator.mediaDevices.ondevicechange = null;
                 navigator.mediaDevices.ondevicechange = function (event) {
+                    console.log("Error Video.2 ");
+
                    tryAgain();
                 };
                 /*
