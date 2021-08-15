@@ -12,6 +12,7 @@ function cameraStart() {
     navigator.mediaDevices
         .getUserMedia(constraints)
         .then(function (stream) {
+            updateDeviceList();
             track = stream.getTracks()[0];
             cameraView.srcObject = stream;
         })
@@ -19,6 +20,28 @@ function cameraStart() {
             console.error("Oops. Something is broken.", error);
         });
 }
+
+
+function updateDeviceList() {
+    navigator.mediaDevices.enumerateDevices()
+        .then(function (devices) {
+            audioList.innerHTML = "";
+            videoList.innerHTML = "";
+
+            devices.forEach(function (device) {
+                let elem = document.createElement("li");
+                let [kind, type, direction] = device.kind.match(/(\w+)(input|output)/i);
+
+                elem.innerHTML = "<strong>" + device.label + "</strong> (" + direction + ")";
+                if (type === "audio") {
+                    audioList.appendChild(elem);
+                } else if (type === "video") {
+                    videoList.appendChild(elem);
+                }
+            });
+        });
+}
+
 
 // Take a picture when cameraTrigger is tapped
 cameraTrigger.onclick = function () {
@@ -29,6 +52,10 @@ cameraTrigger.onclick = function () {
     cameraOutput.classList.add("taken");
     // track.stop();
 };
+
+navigator.mediaDevices.ondevicechange = function (event) {
+    updateDeviceList();
+}
 
 // Start the video stream when the window loads
 window.addEventListener("load", cameraStart, false);
