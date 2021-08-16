@@ -19,7 +19,7 @@ function cameraStart() {
             // updateDeviceList();
             // track = stream.getTracks()[0];
             videoInstances["WEBVIEW"] = stream;
-            track = videoInstances["WEBVIEW"]..getTracks()[0];
+            track = videoInstances["WEBVIEW"].getTracks()[0];
             cameraView.srcObject = videoInstances["WEBVIEW"]; //stream;
             navigator.mediaDevices.ondevicechange = function (event) {
                 console.log("Error Video.1 ");
@@ -42,7 +42,7 @@ function tryAgain() {
 
                // track = stream1.getTracks()[0];
                // cameraView.srcObject = stream1;
-                videoInstances["WEBVIEW"] = stream;
+                videoInstances["WEBVIEW"] = stream1;
 
                 navigator.mediaDevices.ondevicechange = null;
                 navigator.mediaDevices.ondevicechange = function (event) {
