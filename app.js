@@ -38,8 +38,8 @@ function tryAgain() {
             .then(function (stream1) {
                 console.log("TryAgain...1");
 
-                track = stream1.getTracks()[0];
-                cameraView.srcObject = stream1;
+               // track = stream1.getTracks()[0];
+               // cameraView.srcObject = stream1;
                 navigator.mediaDevices.ondevicechange = null;
                 navigator.mediaDevices.ondevicechange = function (event) {
                     console.log("Error Video.2 ");
