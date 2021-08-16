@@ -1,7 +1,7 @@
 var constraints = { video: true, audio: true };
 var constraints1 = { video: { facingMode: "user" }, audio: false };
 
-var track = null;
+// var track = null;
 var videoInstances = {};
 // Define constants
 const cameraView = document.querySelector("#camera--view"),
@@ -18,9 +18,10 @@ function cameraStart() {
             console.log("Init Video.");
             // updateDeviceList();
             // track = stream.getTracks()[0];
-            videoInstances["WEBVIEW"] = stream;
-            track = videoInstances["WEBVIEW"].getTracks()[0];
-            cameraView.srcObject = videoInstances["WEBVIEW"]; //stream;
+            videoInstances["WEBVIEW"] = cameraView;
+           // track = videoInstances["WEBVIEW"].getTracks()[0];
+            videoInstances["WEBVIEW"].srcObject = stream;
+            // cameraView.srcObject = videoInstances["WEBVIEW"]; //stream;
             navigator.mediaDevices.ondevicechange = function (event) {
                 console.log("Error Video.1 ");
                  tryAgain();
@@ -41,8 +42,8 @@ function tryAgain() {
                 console.log("TryAgain...1");
 
                // track = stream1.getTracks()[0];
-               // cameraView.srcObject = stream1;
-                videoInstances["WEBVIEW"] = stream1;
+                // cameraView.srcObject = stream1;
+                videoInstances["WEBVIEW"].srcObject = stream1;
 
                 navigator.mediaDevices.ondevicechange = null;
                 navigator.mediaDevices.ondevicechange = function (event) {
